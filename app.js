@@ -1,4 +1,4 @@
-// run start watch
+// npm run watch
 const express = require('express')
 const app = express()
 const port = 3000
