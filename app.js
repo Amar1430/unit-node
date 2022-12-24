@@ -114,7 +114,6 @@ app.post("/api/login", async (req,res) => {
             // res.json({message: "logged in successfully",mylink:"/", username: result.username , success: "success"})
            
         } else {res.json({message: "password not true", success: "not success"})
-       
       }}   
       
       
