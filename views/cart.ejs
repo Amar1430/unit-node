@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html id="top">
+<head>
+    <%- include("partials/head.ejs") %>
+</head>
+<body  >
+    <%- include("partials/header.ejs") %>
+
+<main class="mainCART">
+  
+  <div class="cartDiv">
+    <div>
+      <div>
+        <h1>السعر</h1>
+        <h1>70</h1>
+      </div>
+      <div>
+        <h1>المقاس</h1>
+    
+        <h1>XXXL</h1>
+      </div>
+    </div>
+    
+    <div>
+      <h1>Amar T-Shert</h1>
+      <img class="cartImage" src="UNIT T SHERT.png" alt="" />
+      <ion-icon class="trash"  id="trash"   name="close-outline"></ion-icon>
+    </div>
+    
+    </div>
+     
+  <div class="cartDiv">
+    <div>
+      <div>
+        <h1>السعر</h1>
+        <h1>70</h1>
+      </div>
+      <div>
+        <h1>المقاس</h1>
+    
+        <h1>XXXL</h1>
+      </div>
+    </div>
+    
+    <div>
+      <h1>Amar T-Shert</h1>
+      <img class="cartImage" src="UNIT T SHERT.png" alt="" />
+      <ion-icon class="trash"  id="trash"   name="close-outline"></ion-icon>
+    </div>
+    
+    </div>
+     
+  <div class="cartDiv">
+    <div>
+      <div>
+        <h1>السعر</h1>
+        <h1>70</h1>
+      </div>
+      <div>
+        <h1>المقاس</h1>
+    
+        <h1>XXXL</h1>
+      </div>
+    </div>
+    
+    <div>
+      <h1>Amar T-Shert</h1>
+      <img class="cartImage" src="UNIT T SHERT.png" alt="" />
+      <ion-icon class="trash"  id="trash"   name="close-outline"></ion-icon>
+    </div>
+    
+    </div>
+    
+  <div class="FinaleBuy">
+     <div><h3 id="cartItem">1</h3><h3>item's</h3></div>
+ <div><h3>Total: </h3><h3>100</h3></div>
+
+<button>Buy</button>
+  </div>
+  
+</main>
+<%- include("partials/foter-pro.ejs") %>
+
+<script>
+
+  const local = {num: 0}
+  const trashs = document.querySelectorAll("#trash")
+  const main = document.querySelector(".mainCART")
+function upNum() {
+
+  const mainDiv = main.querySelectorAll(".cartDiv")
+  const cartItem = document.querySelector("#cartItem")
+  console.log(cartItem)
+  mainDiv.forEach(element => {
+  local.num++;
+});
+cartItem.innertext = local.num
+}
+
+upNum()
+
+trashs.forEach(item => {
+    item.addEventListener("click", (eo) => {
+  item.parentElement.parentElement.remove()
+  const main = document.querySelector(".mainCART").getElementsByClassName("cartDiv")[0]
+    const foterPro = document.querySelector("#foter-pro")
+ 
+    
+if (main == null ) {
+  foterPro.classList.add("foter-pro")
+}else{
+  foterPro.classList.remove("foter-pro")
+}
+upNum()
+    }
+)
+});
+const mainDiv = document.querySelector(".mainCART").getElementsByClassName("cartDiv")[0]
+    const foterPro = document.querySelector("#foter-pro")
+ 
+    
+if (main == null ) {
+  foterPro.classList.add("foter-pro")
+}else{
+  foterPro.classList.remove("foter-pro")
+}
+</script>
+
+    </body>
+    </html>

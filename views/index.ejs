@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html id="top">
+  <head>
+    <%- include("partials/head.ejs") %>
+  </head>
+  <body>
+    <%- include("partials/header.ejs") %>
+
+    <section class="MainPage">
+      <section id="store" class="store">
+        <% tshert.forEach( item => { %>
+        <div class="card">
+          <img src="/img/UNIT T SHERT.png" alt="" />
+          <h1><%= item.name %></h1>
+          <h3><%= item.price %> ر.س</h3>
+          <a class="amarBuy" href="/tshert/<%= item._id %> ">Buy</a>
+        </div>
+        <% }); %>
+      </section>
+
+      <!--       
+      
+      <div class="color1">header</div>
+      <div class="color2">text </div>
+      <div class="color3">border bottom header</div>
+      <div class="color4">actave link</div>
+      <div class="color5">text</div>
+      <div class="color6">click</div> -->
+    </section>
+
+    <%- include("partials/foter.ejs") %>
+  </body>
+</html>

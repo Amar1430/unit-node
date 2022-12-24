@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html id="top">
+  <head>
+    <%- include("partials/head.ejs") %>
+  </head>
+  <body>
+    <%- include("partials/header.ejs") %>
+
+  
+  <section  style=" margin-top: 100px;">
+    <main class="TsherTMine">
+      <div>
+        <div>
+          <h1> <%= tshert.name %></h1>
+          <h2>  <span> بئنه Unit يميز تيشيرت  </span>  
+                <ul>
+                    <li>خفيف للصيف والاجواء الحاره في الشرق الأوسط وفي الخليج </li> 
+                    <li>جميع المقاسات متوفره </li> 
+                    <li> الخلاب Unit يتميز بشعار </li>
+                  </ul>
+                </h2>
+          </div>
+          <img src="/img/<%= tshert.name %>.png" alt="amartshert">
+      </div>
+      <div class="priseDiv">
+        <div>
+          <h3>:السعر</h3>
+          <h3><%= tshert.price %> ر.س</h3>
+        </div>
+          <select class="select"  id="AmarSelect">
+            
+            <option value="M">M</option>
+            <option class="op" value="L">L</option>
+            <option value="S">S</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+            <option value="XXXL">XXXL</option>
+              <option value="XS">XS</option>
+              <option value="XXS">XXS</option>
+              <option value="XXXS">XXXS</option>
+              
+            </select>
+          <a class="amartocart" >اضافة الى السلة<i class="fa-solid fa-2xs fa-bag-shopping"></i></a>
+        </div>
+  </main>
+  </section>
+
+  <%- include("partials/foter.ejs") %>
+  
+    
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("partials/head.ejs") %>
+
+<body>
+    <%- include("partials/header.ejs") %>
+
+    <main class="login">
+        
+        <form class="loginf" >
+            <h1>Registrer</h1>
+      <div>
+              <label for="username">username:</label>
+              <input minlength="2" id="username" type="text">
+      </div>
+         <div>
+               <label for="password">password:  </label>
+               <input minlength="5" id="password" type="password">
+         </div>
+            <button id="logInB">Registrer</button>
+            <a href="/home/login" >Log In</a>
+        </form>
+    </main>
+  <%- include("partials/foter-pro.ejs") %>
+    
+</body>
+<script>
+    const from = document.querySelector(".loginf")
+    const button = document.querySelector("#logInB")
+
+    from.addEventListener("submit", login)
+    
+    function login(e) {
+        e.preventDefault()
+        const username = document.getElementById("username").value
+        const password = document.getElementById("password").value
+        
+  
+        fetch('/api/registrer', {
+            method: 'POST', // or 'PUT'
+             headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+               username,
+               password
+            }),
+                })
+             .then((response) => response.json())
+             .then((data) => {
+             console.log('Success:', data);})
+     
+ 
+}
+</script>
+</html>

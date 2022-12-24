@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("partials/head.ejs") %>
+
+<body>
+    <%- include("partials/header.ejs") %>
+
+    <main class="login">
+        
+        <form class="loginf" >
+            <h1>Log In</h1>
+            <h3 id="error"></h3>
+      <div>
+              <label for="username">username:</label>
+              <input minlength="2" autocomplete="off" id="username" type="text">
+      </div>
+         <div>
+               <label for="password">password:  </label>
+               <input minlength="5" autocomplete="off" id="password" type="password">
+         </div>
+            <button id="logInB">Log In</button>
+            <a href="/home/registrer" >Registrer</a>
+        </form>
+    </main>
+  <%- include("partials/foter-pro.ejs") %>
+    
+</body>
+<script>
+    const from = document.querySelector(".loginf")
+    const button = document.querySelector("#logInB")
+
+    from.addEventListener("submit", login)
+    
+    function login(e) {
+        e.preventDefault()
+        const username = document.getElementById("username").value
+        const error = document.getElementById("error")
+        
+        const password = document.getElementById("password").value
+        
+  
+        fetch('/api/login', {
+            method: 'POST', // or 'PUT'
+             headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+               username,
+               password
+            }),
+                })
+             .then((response) => response.json())
+             .then((data) => {
+                error.innerText = data.message
+                
+             })
+     
+ 
+}
+</script>
+</html>
