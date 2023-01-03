@@ -40,7 +40,11 @@
               <option value="XXXS">XXXS</option>
               
             </select>
-          <a class="amartocart" >اضافة الى السلة<i class="fa-solid fa-2xs fa-bag-shopping"></i></a>
+            <form action="/addToCart">
+              <h1 style="display: none;"><%= tshert._id %> </h1>
+              <button class="amartocart">إضافة الى سلة التسوق<i class="fa-solid fa-2xs fa-bag-shopping"></i></button>
+       
+        </form>
         </div>
   </main>
   </section>
