@@ -145,7 +145,9 @@ app.post("/api/registrer", async (req,res) => {
 
   
 })
-
+app.post("/addToCart", (req,res) => {
+  console.log(req.body);
+})
 
 //404
 app.get('/home/team', (req, res) => {
