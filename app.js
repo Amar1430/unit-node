@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
  const local = {user: ""}
 mongoose.connect("mongodb+srv://amar:Amarxx@cluster0.u9xyi5h.mongodb.net/?retryWrites=true&w=majority")
   .then( result => {
-app.listen(port, () => {
+app.listen(port, process.env.port || 3000 , () => {
   console.log(`Example app listening on port ${port}`)
 })
 
