@@ -51,8 +51,12 @@
                 })
              .then((response) => response.json())
              .then((data) => {
-                error.innerText = data.message
-                
+                 if(data.message == "login"){
+                     window.location.href = '/home'
+                    }else{
+                        error.innerText = data.message
+                        
+                }
              })
      
  

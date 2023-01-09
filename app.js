@@ -94,6 +94,7 @@ app.post("/home", (req,res) => {
  
 })
 
+
 app.post("/api/login", async (req,res) => {
     const {username,password} = req.body
 
@@ -110,10 +111,9 @@ app.post("/api/login", async (req,res) => {
          
           if (await bcrypt.compare(password, result.password)) {
             local.user = result.username
-            
-            res.redirect("/home")
-            // res.json({message: "logged in successfully",mylink:"/", username: result.username , success: "success"})
+            res.json({message: "login", success: "success"})
            
+            
         } else {res.json({message: "password not true", success: "not success"})
       }}   
       
@@ -152,4 +152,4 @@ app.post("/addToCart", (req,res) => {
 //404
 app.get('/home/team', (req, res) => {
   res.render('team', {mytitle: "Unit Team" , user: local.user})
-})
+}) 
