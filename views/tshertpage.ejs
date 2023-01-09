@@ -40,8 +40,8 @@
               <option value="XXXS">XXXS</option>
               
             </select>
-            <form action="/addToCart">
-              <h1 style="display: none;"><%= tshert._id %> </h1>
+            <form >
+              <h1 id="idCart" style="font-size: 0px;"><%= tshert._id %> </h1>
               <button class="amartocart">إضافة الى سلة التسوق<i class="fa-solid fa-2xs fa-bag-shopping"></i></button>
        
         </form>
@@ -53,4 +53,24 @@
   
     
   </body>
+  <script>
+    const idCart = document.querySelector("#idCart").innerText
+    const button = document.querySelector(".amartocart")
+    button.addEventListener("click", () => {     
+      const tshert = document.querySelector("#AmarSelect").value
+      const go = tshert + "," + idCart
+      console.log(go)
+      fetch('/api/addToCart', {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          go
+        }),
+      })
+      .then((response) => response.json())
+      .then((data) => { })
+    })
+      </script>
 </html>

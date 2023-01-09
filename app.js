@@ -6,7 +6,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 app.use(require("body-parser").json())
 app.use(express.urlencoded({ extended: true }));
- const local = {user: ""}
+ const local = {user: "", }
+ const cart =  []
+
+
 mongoose.connect("mongodb+srv://amar:Amarxx@cluster0.u9xyi5h.mongodb.net/?retryWrites=true&w=majority")
   .then( result => {
 app.listen(port, process.env.port || 3000 , () => {
@@ -57,7 +60,12 @@ app.get("/home", (req,res) => {
   })
 
   app.get('/home/cart', (req, res) => {
-    res.render('cart', {mytitle: "Cart" , user: local.user})
+    Tshert.find().then((result) => {
+      res.render('cart', {mytitle: "Cart" , user: local.user, thsert: result})
+    }).catch((err) => {
+      console.log(err)
+      
+    })
   })
 
   app.get('/home/login', (req, res) => {
@@ -70,7 +78,7 @@ app.get("/home", (req,res) => {
 
   app.get('/home/tshert/:id', (req, res) => {
     Tshert.findById(req.params.id).then((result) => { 
-      res.render('tshertpage', {tshert: result , mytitle:result.name })
+      res.render('tshertpage', {tshert: result, user: local.user , mytitle:result.name })
     }).catch((err) => {
       console.log(err) 
     })
@@ -144,10 +152,13 @@ app.post("/api/registrer", async (req,res) => {
   
 
   
-})
-app.post("/addToCart", (req,res) => {
-  console.log(req.body);
-})
+    })
+
+    app.post("/api/addToCart", (req,res) => {
+
+      cart.push(req.body.go)
+  console.log(cart);
+    })
 
 //404
 app.get('/home/team', (req, res) => {
