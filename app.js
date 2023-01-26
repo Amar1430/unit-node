@@ -43,6 +43,7 @@ liveReloadServer.server.once("connection", () => {
 
 const Tshert = require("./models/tshertSchema");
 const User = require("./models/user");
+const { findOneAndDelete } = require('./models/tshertSchema');
  
 
 // app.get 
@@ -61,7 +62,7 @@ app.get("/home", (req,res) => {
 
   app.get('/home/cart', (req, res) => {
     Tshert.find().then((result) => {
-      res.render('cart', {mytitle: "Cart" , user: local.user, thsert: result})
+      res.render('cart', {mytitle: "Cart" , user: local.user, tshert: result  ,cart: cart})
     }).catch((err) => {
       console.log(err)
       
@@ -156,9 +157,27 @@ app.post("/api/registrer", async (req,res) => {
 
     app.post("/api/addToCart", (req,res) => {
 
-      cart.push(req.body.go)
-  console.log(cart);
+      const count = cart.length + 1 - 1
+   
+ const n = req.body.go
+ n.count = count 
+ 
+      cart.push(n)
+      console.log(cart)
+      
     })
+    app.post("/api/cartIDWant", (req,res) => {
+
+    res.json(cart)
+    })
+    app.post("/api/CartDel", (req,res) => {
+const id = req.body.id 
+const result = cart.find (({ tshert }) => tshert === id )
+
+const count = result.count
+delete cart[count]
+console.log(cart);
+      })
 
 //404
 app.get('/home/team', (req, res) => {

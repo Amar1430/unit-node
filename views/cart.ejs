@@ -5,25 +5,27 @@
 </head>
 <body  >
     <%- include("partials/header.ejs") %>
-
+    
 <main class="mainCART">
-  <% tshert.forEach(item => { %>
+         
+         <% tshert.forEach(item => { %>
     
   <div class="cartDiv">
     <div>
       <div>
-        <h1>السعر</h1>
-        <h1> <%= item.price %> </h1>
+         <h1 style="font-size: 0px; " id="cartItemId"><%= item._id %> </h1>
+         <h1>السعر</h>
+        <h1 id="price"> <%= item.price %> </h1>
       </div>
       <div>
         <h1>المقاس</h1>
     
-        <h1>XXXL</h1>
+        <h1 id="size">XXXL</h1>
       </div>
     </div>
     
     <div>
-      <h1>Amar T-Shert</h1>
+      <h1><%= item.name%></h1>
       <img class="cartImage" src="UNIT T SHERT.png" alt="" />
       <ion-icon class="trash"  id="trash"   name="close-outline"></ion-icon>
     </div>
@@ -32,27 +34,30 @@
 
     <% }); %> 
   <div class="FinaleBuy">
-     <div><h3 id="cartItem">1</h3><h3>item's</h3></div>
- <div><h3>Total: </h3><h3>100</h3></div>
-
-<button>Buy</button>
+    <div><h3 id="cartItem">1</h3><h3>item's</h3></div>
+    <div><h3>Total: </h3><h3>100</h3></div>
+    
+    <button>Buy</button>
   </div>
   
+  <h1 style="font-size: 0px; " id="cart"><%= cart %> </h1>
 </main>
 <%- include("partials/foter-pro.ejs") %>
 
 <script>
-
-  const local = {num: 0}
+  const cartDiv = document.querySelectorAll(".cartDiv")
+const foterPro = document.querySelector("#foter-pro")
+  const local = {num: 0, here:"no"}
+  
   const trashs = document.querySelectorAll("#trash")
   const main = document.querySelector(".mainCART")
-function upNum() {
-
-  const mainDiv = main.querySelectorAll(".cartDiv")
-  const cartItem = document.querySelector("#cartItem")
-  console.log(cartItem)
-  mainDiv.forEach(element => {
-  local.num++;
+  function upNum() {
+    
+    const mainDiv = main.querySelectorAll(".cartDiv")
+    const cartItem = document.querySelector("#cartItem")
+ 
+    mainDiv.forEach(element => {
+      local.num++;
 });
 cartItem.innertext = local.num
 }
@@ -60,30 +65,103 @@ cartItem.innertext = local.num
 upNum()
 
 trashs.forEach(item => {
+  const id = item.parentElement.parentElement.querySelector("#cartItemId").innerText
     item.addEventListener("click", (eo) => {
-  item.parentElement.parentElement.remove()
+      fetch('/api/CartDel', {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id
+        }),
+      })
+      .then((response) => response.json())
+      item.parentElement.parentElement.remove()
   const main = document.querySelector(".mainCART").getElementsByClassName("cartDiv")[0]
     const foterPro = document.querySelector("#foter-pro")
  
+    if(main == undefined){
+      local.here = "no"
+    }
+  
+    async function ads(params) {
     
-if (main == null ) {
-  foterPro.classList.add("foter-pro")
-}else{
-  foterPro.classList.remove("foter-pro")
-}
+    if (local.here == "no" ) {
+      foterPro.classList.add("foter-pro")
+
+    }else if (local.here == "yes"){
+    await foterPro.classList.remove("foter-pro")
+
+    }
+    }
+    ads()
 upNum()
     }
 )
 });
 const mainDiv = document.querySelector(".mainCART").getElementsByClassName("cartDiv")[0]
-    const foterPro = document.querySelector("#foter-pro")
- 
+
+
+
+const cartItemId = document.querySelectorAll("#cartItemId")
+
+
+window.addEventListener("load", (e) => {
+  
+fetch('/api/cartIDWant', {  method: 'POST',  })
+      .then((response) => response.json())
+      .then((data) => {
+     
+      
+      if(data[0] != undefined){
+           console.log(data[0])
+           
+        cartItemId.forEach(item => {
+       
+          
+       const result = data.find (({ tshert }) => tshert === item.innerText )
+       
+       if (result == undefined) {
+         item.parentElement.parentElement.parentElement.remove()
+         
+       }else{
+         item.parentElement.parentElement.querySelector("#size").innerText = result.size
+         local.here = "yes"
+       }
+       });
+      }else{
+           console.log(data[0])
+       if (cartDiv != null) {
+        cartDiv.forEach(element => {
+          element.remove()
+        });
+       }
+      }
     
-if (main == null ) {
-  foterPro.classList.add("foter-pro")
-}else{
-  foterPro.classList.remove("foter-pro")
-}
+       
+       
+
+
+
+
+       })
+})
+    
+
+ async function ads(params) {
+    
+  if (local.here == "no" ) {
+    foterPro.classList.add("foter-pro")
+  
+  }else if (local.here == "yes"){
+  await foterPro.classList.remove("foter-pro")
+
+  }
+  }
+  ads()
+
+
 </script>
 
     </body>
