@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html id="top">
+  <head>
+    <%- include("partials/head.ejs") %>
+  </head>
+  <body>
+    <%- include("partials/header.ejs") %>
+
+    <section style="margin-top: 120px; margin-bottom: 100px;" class="MainPage">
+        <div class="Account">
+            <h1> Welcome, <%= user %></h1>
+
+            <h2> - Edit</h2>
+            <label for="editUsername">Edit You'r Username :</label>
+            <input minlength="2"  id="editUsername" type="text">
+            <button id="DoneEdit">Done!</button>
+            <h2>- Log out</h2>
+            <button id="logout">Log out</button>
+            <h2>- Delete You'r Account</h2>
+            <button id="delete">Delete This Account</button>
+        </div>
+    </section>
+<script>
+ const deleteBtn = document.querySelector("#delete")
+ const DoneEdit = document.querySelector("#DoneEdit")
+ const logout = document.querySelector("#logout")
+ 
+ DoneEdit.addEventListener("click",(e) => {
+     const editUsername = document.querySelector("#editUsername").value
+    if (editUsername != "") {
+        fetch('/api/editUser', {
+            method: 'post', // or 'PUT'
+             headers: {
+                 'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                editUsername
+            }),
+                })
+                .then((response) => response.json())
+             .then((data) => {
+                
+                 if(data == "done"){
+                     
+                 window.location.href = "/home"
+                }
+             })
+    }
+     
+ })
+
+    deleteBtn.addEventListener("click", (e) => {
+        
+        fetch('/api/delete-Account', {
+            method: 'delete', // or 'PUT'
+             headers: {
+                 'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                
+            }),
+                })
+                .then((response) => response.json())
+             .then((data) => {
+                 console.log(data)
+                 if(data == "done"){
+                     
+                 window.location.href = "/home"
+                }
+             })
+            })
+            
+    logout.addEventListener("click", (e) => {
+        
+        fetch('/api/logout', {
+            method: 'post', // or 'PUT'
+             headers: {
+                 'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                
+            }),
+                })
+                .then((response) => response.json())
+             .then((data) => {
+                 console.log(data)
+                 if(data == "done"){
+                     
+                 window.location.href = "/home"
+                }
+             })
+            })
+</script>
+    <%- include("partials/foter.ejs") %>
+  </body>
+</html>

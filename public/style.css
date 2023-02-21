@@ -97,9 +97,14 @@ td {
   margin-left: 7px;
   font-size: 35px;
 }
-
+#store{
+  font-weight: 800;
+  margin-left: 20px;
+  font-size: 30px;
+  margin-top: 160px;
+}
 .store {
-  margin-top: 190px;
+  margin-top: 40px;
   width: 100%;
   height: fit-content;
   display: flex;
@@ -176,7 +181,7 @@ td {
   transition: all 3s ease;
   font-size: 28px;
   font-weight: 800;
-  color: rgb(0, 0, 179);
+  color: black;
   cursor: pointer;
   text-decoration: none;
   font-size: 30px;
@@ -203,12 +208,48 @@ td {
   height: fit-content;
 }
 
+@media (max-width: 1100px) {
+  .TsherTMine div img{
+    width: 300px !important;
+    height: 300px !important;
+  }
+
+
+}
+
+@media (max-width: 823px) {
+
+  .menu {
+    display: block !important;
+  }
+
+  .hover-header-elment:hover .headerA {
+    display: block;
+  }
+  .hover-header-elment:hover .menu {
+    transform: translate(218px, -4px) rotate(270deg);
+    height: fit-content;
+    width: fit-content;
+  }
+  header > div > div > a {
+    display: none;
+  }
+
+}
 @media (max-width: 680px) {
   .store {
     text-align: center;
     justify-content: center;
   }
+  .TsherTMine div div img{
+    width: 300px !important;
+    height: 300px !important;
 
+  }
+  .TsherTMine div div h1{
+ font-size: 30px !important;
+
+  }
   .menu {
     display: block !important;
   }
@@ -226,6 +267,97 @@ td {
   }
 }
 
+
+/* -------------------------------------------------------------- */
+
+
+
+@media (max-width: 590px) {
+  .TsherTMine div img{
+    width: 300px !important;
+    height: 300px !important;
+    margin-right:10px !important;
+  }
+  .priseDiv{
+    width: 400px;
+  }
+  .amartocart{
+    width: 150px !important;
+    height: 100px !important;
+  }
+
+}
+
+
+ @media (max-width: 550px) {
+  .TsherTMine div div img{
+    width: 250px !important;
+    height: 250px !important;
+    margin-right:10px !important;
+  }
+  }@media (max-width: 535px) {
+    .loginf{
+     width: 400px !important;
+    }
+   }
+@media (max-width: 500px) {
+  .ReqDiv{
+    width: 300px !important;
+    height: 100px !important;
+  }
+  .ReqUser{
+    font-size: 20px;
+    margin-left:  14px !important;
+  }
+  .ReqView{
+    font-size: 10px;
+    margin-left:  16px !important;
+  }
+  .ReqItem{
+    width: 260px !important;
+  }
+  .TsherTMine div div h1{
+    font-size: 25px !important;
+   
+     }
+
+     .TsherTMine div div img{
+width: 200px !important;
+height: 200px !important;
+       }
+}
+@media (max-width: 650px) {
+  .priseDiv{
+   width: 360px !important;
+   margin-left: auto !important;
+   margin-right: auto !important;
+  }  .priseDiv button{
+    width: 140px !important;
+    height: 100px !important;
+    margin-right: 100px !important;
+   }
+  
+}
+@media (max-width: 435px) {
+  .loginf{
+   width: 300px !important;
+  }
+  .loginf > h1{
+    width: 200px !important;
+   }
+   .loginf > div{
+    width: 200px !important;
+   }
+  .TsherTMine>div div >img{
+    width: 150px !important;
+    height: 150px !important;
+
+ 
+  } .TsherTMine>div{
+    gap: 10px 10px;
+  }
+  
+ }
 @media (max-width: 350px) {
   .hover-header-elment:hover .menu {
     transform: translateX(360%) rotate(270deg);
@@ -249,8 +381,125 @@ td {
   }
 }
 
-/* -------------------------------------------------------------- */
+@media (max-width: 340px) {
+  .TsherTMine>div div >img{
+    width: 80px !important;
+    height: 80px !important;
+margin-left: auto !important;
+margin-right: auto !important;
+  }
+  .TsherTMine div  {
+column-gap: 200px;
+align-items: center;
+justify-content: center;
+  }
+}
+@media (max-width: 300) {
+  .TsherTMine>div div >img{
 
+    margin-right: 70px !important;
+  }
+
+}
+
+@media (max-width: 390px) {
+  .TsherTMine>div div >img{
+    width: 150px !important;
+    height: 150px !important;
+    margin-right: 30px !important;
+  }
+  .TsherTMine div  {
+column-gap: 200px;
+align-items: center;
+justify-content: center;
+  }
+}
+ @media (max-width: 325px) {
+  .store > .card {
+    margin-left: 0;
+    width: 300px;
+  }
+  .menu {
+    transform: translate(-24px, 0);
+    width: 100%;
+  }
+  .hover-header-elment:hover .menu {
+    transform: translateX(300%) rotate(270deg);
+    height: fit-content;
+    width: fit-content;
+  }
+  .loginf{
+    width: 260px !important;
+   }
+   .loginf > div> input{
+    width: 100px !important;
+    height: 30px;
+   }
+   .loginf > div> label{
+    width: 100px !important;
+    font-size: 13px;
+    height: 30px;
+   }
+}
+
+
+
+
+
+
+
+@media (max-width: 365px) {
+  .ReqDiv{
+    width: 200px !important;
+  }
+  .ReqFinish{
+    width: 70px !important;
+    height: 50px !important;
+  }
+  .ReqItem{
+    width: 210px !important;
+  }
+  .TsherTMine>div div >img{
+    width: 130px !important;
+    height: 130px !important;
+    margin-right: 40px;
+  }
+
+  #Tshertname{
+   margin-top: 10px !important;
+  }
+  .priseDiv{
+    width: 260px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+   }  
+   .priseDiv button{
+    font-size: 13px;
+    width: 135px !important;
+    height: 55px !important;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+   }
+}
+@media (max-width: 375px) {
+  
+  .TsherTMine>div>img{
+    width: 200px !important;
+    height: 200px !important;
+    margin-right: 0;
+    margin-left: 40px;
+  }
+  #Tshertname{
+    font-size: 25px !important;
+  } .TsherTMine>div>div>div>h2{
+   font-size: 20px;
+  }
+  .TsherTMine>div>div>div{
+    display: flex;
+    flex-direction: row;
+   }
+}
 @media (max-width: 325px) {
   .store > .card {
     margin-left: 0;
@@ -265,12 +514,58 @@ td {
     height: fit-content;
     width: fit-content;
   }
+  header div img{
+    height: 75px;
+    
+  }
+  .on_top{
+    position: absolute;
+    bottom: 15px;
+    left: 100px;
+    font-size: 15px;
+    font-family: 'Sofia';
+  }
 }
 
+@media (max-width:593px) {
+  .cartDiv div   {
+    font-size: 10px !important;
+  }  .cartDiv div img{
+    width: 60px;
+    height: 60px !important;
+  }
+  
+  .cartDiv > div:nth-child(1) > div > h1:nth-child(2) ,
+  .cartDiv > div:nth-child(1) > div > h1:nth-child(3),
+   .cartDiv > div:nth-child(1) > div:nth-child(2) > h1:nth-child(1){
+    font-size: 18px;
+
+   } 
+   .cartDiv > div:nth-child(1)     {
+    margin-left: 160px !important;
+    } 
+    .cartDiv > div:nth-child(1)   > div:nth-child(2)  {
+      margin-right: 50px !important;
+      } 
+   .cartDiv{
+  flex-direction: column-reverse !important;
+  height:150px !important;
+  align-items: center;
+  justify-content: center !important;
+   }
+}
 .TsherTMine > div {
   margin: 0;
-  display: flex;
-  justify-content: space-between;
+display: grid;
+grid-template-columns: 1fr 1fr ;
+grid-template-rows: 1fr 1fr ;
+gap: 10px 30px;
+grid-template-areas: 
+"title img "
+"title img "
+"ff ff "
+
+;
   margin-bottom: 80px;
 }
 
@@ -288,7 +583,7 @@ td {
   font-size: 50px;
 }
 
-.TsherTMine > div > img {
+.TsherTMine > div> div > img {
   margin-right: 100px;
   border-radius: 20px;
   border: #f26938 solid 0.2px;
@@ -517,30 +812,10 @@ html {
   display: none;
 }
 
-.amarPage {
-  display: none;
-}
-.hasanPage {
-  display: none;
-}
-.redhPage {
-  display: none;
-}
-.mohmmedPage {
-  display: none;
-}
-.qasemPage {
-  display: none;
-}
-.hadiPage {
-  display: none;
-}
-.CartPage {
-  display: none;
-}
 
 .cartImage {
   border-radius: 50%;
+  margin-left: 10px;
 }
 .mainCART {
   margin-top: 100px;
@@ -567,7 +842,7 @@ html {
 
 .cartDiv > div:nth-child(1) {
   display: flex;
-  width: 150px;
+  width: 200px;
   justify-content: space-around;
   flex-direction: column;
 }
@@ -679,7 +954,7 @@ html {
 .loginf {
   background-color: #f2f2f2;
   width: 500px;
-  height: 300px;
+  height: 350px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -690,6 +965,9 @@ html {
   margin-bottom: 100px;
   border-radius: 10px;
   border-bottom: #f2cb57 4px solid;
+}
+#addTocartForm{
+  display: none;
 }
 .loginf h1 {
   display: block;
@@ -704,6 +982,7 @@ html {
  font-size: 26px;
   border-radius: 10px;
   box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.3);
+  
 }
 .loginf div {
   width: 400px;
@@ -712,7 +991,7 @@ html {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .loginf label {
   color: white;
@@ -759,6 +1038,25 @@ html {
   background-color: #f0f0f0;
   box-shadow: 3px 4px 10px 1px rgba(0, 0, 0, 0.3);
 }
+#needLogin {
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-left: 30px;
+  margin-top: 70px;
+}
+#needLogin h1{
+  font-size: 20px;
+
+}
+#needLogin h3 {
+position: absolute;
+bottom:  10px;
+left: -25px;
+width: 180px;
+}
+
 
 .color1 {
   margin-top: 90px;
@@ -831,4 +1129,166 @@ margin-left: 30px;
   100%{
     right: -200px;
   }
+}
+
+
+.ReqDiv{
+  width: 400px;
+  height: 80px;
+  border: #f26938 solid 1px;
+  border-radius: 10px;
+  margin-top: 10px;
+  background-color: #f1f1f1;
+  margin-left: 40px;
+  position: relative;
+}
+.ReqUser{
+  font-size: 23px;
+  margin-left: 30px;
+  margin-top: 1px;
+}
+
+.ReqFinish{
+  display: block;
+  font-size: 13px;
+  background-color: white;
+  border-radius: 10px;
+  width:140px;
+  text-align: center;
+  height: 25px;
+  color: #000;
+  text-decoration: none;
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  font-weight: 600;
+}
+
+.ReqView{
+  margin-left: 42px;
+
+}
+
+
+.ReqUser2{
+
+  font-size: 45px;
+  height:73px;
+  margin-left: 10px;
+}
+
+.ReqPhone{
+
+  font-size: 25px;
+  margin-left:50px;
+
+  height: 40px;
+}
+
+.ReqName{
+  font-size: 23px;
+  margin-left: 30px;
+  margin-top: 1px;
+}
+.ReqPrice{
+  font-size: 16px;
+  margin-left: 30px;
+  margin-top: 1px;
+}
+
+.ReqItem{
+  display: block;
+  width: 400px;
+  height: 80px;
+  border: #f26938 solid 1px;
+  border-radius: 10px;
+  margin-top: 20px;
+  background-color: #f1f1f1;
+  margin-left: 60px;
+  position: relative;
+  
+}
+
+#ReqCheck{
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  right: 10px;
+  top: 10px;
+}
+
+#doneCart{
+  display: block;
+  text-align: center;
+  width: 150px;
+  height: 60px;
+  margin-top: 35px;
+  background-color: rgb(0, 200, 0);
+  font-size: 30px;
+  border-radius: 20px;
+  color: white;
+  border: none;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+}
+.Account{
+  margin-left: 20px;
+
+}
+
+.Account h1{
+  margin-left: -10px;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+
+.Account label{
+
+  font-size: 15px;
+  font-weight: 600;
+text-align: center;
+  margin-bottom: 10px;
+  position: relative;
+  bottom: 4px;
+}
+
+.Account input{
+  border-radius: 10px;
+  border: solid black 1px;
+  font-size: 20px;
+  font-weight: 600;
+  width: 100px;
+  height: 30px;
+
+}
+.Account input:hover{
+
+  width: 150px;
+
+
+}
+.Account #DoneEdit{
+  color: white;
+  background-color: #f2cb57;
+  border: none;
+  width: 50px;
+  margin-top: 20px;
+  border-radius: 10px;
+  height: 30px;
+  cursor: pointer;
+  position: relative;
+  bottom: 2px;
+}
+.Account #delete, #logout{
+  color: white;
+  background-color: #bf3939;
+  border: none;
+  width: 150px;
+  margin-top: 20px;
+  border-radius: 10px;
+  height: 50px;
+  cursor: pointer;
 }

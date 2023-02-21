@@ -3,17 +3,18 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
  
 // define the Schema (the structure of the article)
-const user = new Schema({
-  username: String,
-  password: String,
-  phone: Number,
-  admin: String
+const inCart = new Schema({
+  size: String,
+  idCart: String,
+  user: String,
+  name: String,
+  price: String,
 });
  
  
 // Create a model based on that schema
-const User = mongoose.model("User", user);
+const incart = mongoose.model("inCart", inCart);
  
  
 // export the model
-module.exports = User; 
+module.exports = incart; 

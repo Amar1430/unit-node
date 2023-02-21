@@ -6,8 +6,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 app.use(require("body-parser").json())
 app.use(express.urlencoded({ extended: true }));
- const local = {user: "", }
- const cart =  []
+ const local = {user: "Amar", }
+
 
 
 mongoose.connect("mongodb+srv://amar:Amarxx@cluster0.u9xyi5h.mongodb.net/?retryWrites=true&w=majority")
@@ -40,15 +40,41 @@ liveReloadServer.server.once("connection", () => {
     liveReloadServer.refresh("/");
   }, 100);
 }); 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-const Tshert = require("./models/tshertSchema");
-const User = require("./models/user");
-const { findOneAndDelete } = require('./models/tshertSchema');
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDgSuGSq9qZ_HUYLAFdMrJDicHzzhYCAU0",
+  authDomain: "unit-38928.firebaseapp.com",
+  projectId: "unit-38928",
+  storageBucket: "unit-38928.appspot.com",
+  messagingSenderId: "436336067121",
+  appId: "1:436336067121:web:1dfbc88337a854d9e58b10"
+};
+
+// Initialize Firebase
+const app2 = initializeApp(firebaseConfig);
+
+
+const Tshert = require("../models/tshertSchema");
+const User = require("../models/user");
+const doneCart = require("../models/DoneCart");
+
+const { findOneAndDelete } = require('../models/tshertSchema');
+const incart = require('../models/inCart');
+const { request } = require('express');
  
 
 // app.get 
 app.get('/', (req, res) => {
   res.redirect("/home")
+})
+
+app.get('/home/profile', (req, res) => {
+  res.render("profile", { mytitle: "Profile" , user: local.user});
 })
 app.get("/home", (req,res) => {
   
@@ -61,8 +87,10 @@ app.get("/home", (req,res) => {
   })
 
   app.get('/home/cart', (req, res) => {
-    Tshert.find().then((result) => {
-      res.render('cart', {mytitle: "Cart" , user: local.user, tshert: result  ,cart: cart})
+    incart.find({user: local.user}).then((inCart) => {
+ 
+        res.render('cart', {mytitle: "Cart" , user: local.user, tshert: inCart,   })
+    
     }).catch((err) => {
       console.log(err)
       
@@ -72,7 +100,22 @@ app.get("/home", (req,res) => {
   app.get('/home/login', (req, res) => {
     res.render('login', {mytitle: "Log In", user: local.user })
   })
+  app.get('/home/admin/dashboard', (req, res) => {
+    User.findOne({username: local.user}).then((result) => {
+     if (result.admin == "yes") {
 
+       doneCart.find().then((result) => {
+       
+        res.render('Dashboard', {mytitle: "DashBoard", user: local.user, req: result })
+        
+      })
+
+     } else {
+      res.redirect("/home")
+     }
+      
+    })
+  })
   app.get('/home/registrer', (req, res) => {
     res.render('registrer', {mytitle: "Registrer", user: local.user })
   })
@@ -85,8 +128,39 @@ app.get("/home", (req,res) => {
     })
   })
 
+  app.get('/home/admin/finishReq/:id', (req, res) => {
+    doneCart.findById(req.params.id).then((result) => { 
+     
+        User.findOne({username: local.user}).then((resultUser) => {
+       const l = []
+       
+  result.name.forEach(element => {
+    
+    Tshert.findOne({name: element}).then((resultT) => {
+ l.push(resultT)
+    
+  }).catch((err) => {
+    console.log(err) 
+  })
+});
+setTimeout(() => {
+ 
+  res.render('reqFinish', {req: result,phone:resultUser.phone, tshert: l , user: local.user , mytitle: resultUser.username })
+}, 300);
 
 
+
+
+
+
+    })
+  }).catch((err) => {
+    console.log(err) 
+  })
+})
+app.get('/home/team', (req, res) => {
+  res.render('team', {mytitle: "Unit Team" , user: local.user})
+}) 
 //app.post
 app.post("/home", (req,res) => {
   const tshert = new Tshert(req.body);
@@ -108,7 +182,6 @@ app.post("/api/login", async (req,res) => {
     const {username,password} = req.body
 
    User.findOne({username: username}).then((result) => {
-
 
         if (result == null) {
          return   res.json({message: "username not find", success: "not success"}) 
@@ -136,18 +209,26 @@ app.post("/api/login", async (req,res) => {
 
 app.post("/api/registrer", async (req,res) => {
 
-  const { username, password: plainTextPassword } = req.body;
+  const { username, password: plainTextPassword, phone, admin } = req.body;
   const password = await bcrypt.hash(plainTextPassword, 10);
 
 
- 
-    new User({username , password}).save().then((result) => {
+User.findOne({username}).then((result) => {
+
+  if(result == null){
+    new User({username , password, phone, admin}).save().then((result) => {
       local.user = result.username
-    res.redirect("/home")
-     }).catch((err) => {
-       console.log(err)
-  
-     })
+    
+      res.json({message: "done", success: "success"})
+    }).catch((err) => {
+      console.log(err)
+      
+    })
+  }else{
+    
+    res.json({message: "Userneam in Use", success: "not success"})
+  }
+  })
  
     
   
@@ -157,29 +238,92 @@ app.post("/api/registrer", async (req,res) => {
 
     app.post("/api/addToCart", (req,res) => {
 
-      const count = cart.length + 1 - 1
-   
- const n = req.body.go
- n.count = count 
- 
-      cart.push(n)
-      console.log(cart)
+      new incart(req.body).save().then((result) => {
+
+      }).catch((err) => {
+        console.log(err)
+        
+      })
+      console.log(req.body)
       
     })
-    app.post("/api/cartIDWant", (req,res) => {
+    app.post("/api/DoneShop", (req,res) => {
+     
+      new doneCart(req.body).save().then((result) => {
+    
+      
+    
+          
+     result.name.forEach(element => {
+       
+       incart.findOneAndDelete({name: element}).then((resultT) => {
+   res.json("done")
+     }).catch((err) => {
+       console.log(err) 
+     })
+   });
 
-    res.json(cart)
-    })
-    app.post("/api/CartDel", (req,res) => {
-const id = req.body.id 
-const result = cart.find (({ tshert }) => tshert === id )
-
-const count = result.count
-delete cart[count]
-console.log(cart);
+   
+ 
+      }).catch((err) => {
+        console.log(err)
+        
       })
+   
+    })
+
+    app.post("/api/editUser", (req,res) => {
+
+      User.findOneAndUpdate({username: local.user}, {username: req.body.editUsername}, (err, result) => {
+        res.json("done")
+        local.user = req.body.editUsername
+
+      })
+       
+
+
+        
+      })
+      app.post("/api/logout", (req,res) => {
+
+        res.json("done")
+        local.user = ""
+        })
+    // delet
+    app.delete("/api/CartDel", (req,res) => {
+
+    
+
+      incart.findByIdAndDelete(req.body.id).then((result) => {
+    
+      
+      })
+        
+      })
+        
+      app.delete("/api/done", (req,res) => {
+
+        doneCart.findByIdAndDelete(req.body.id).then((result) => {
+          res.json({data:"done"})
+          })
+
+          
+        })
+          
+        app.delete("/api/delete-Account", (req,res) => {
+
+          User.findOneAndDelete({username: local.user}).then((result) => {
+            res.json("done")
+            local.user = ""
+            })
+  
+            
+          })
+            
+  
+
 
 //404
-app.get('/home/team', (req, res) => {
-  res.render('team', {mytitle: "Unit Team" , user: local.user})
+app.use( (req, res) => {
+  res.render('404', {mytitle: "404" , user: local.user})
 }) 

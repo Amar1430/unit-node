@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html id="top">
+  <head>
+    <%- include("partials/head.ejs") %>
+  </head>
+  <body>
+    <%- include("partials/header.ejs") %>
+
+  
+  <section  style=" margin-top: 100px; margin-bottom: 250px;">
+    <main class="TsherTMine">
+
+<section>
+<h1 style="font-size: 35px; margin-left: 30px;">- الطلبات</h1>
+
+<div>
+
+    <% req.forEach(item => { %>
+      <div class="ReqDiv">
+        
+        <h1 class="ReqUser"><%= item.user %></h1>
+        <h5 class="ReqView"> <%= item.name[0] %>..</h5>
+        <a class="ReqFinish" href="/home/admin/finishReq/<%= item._id %>">انهاء هذا الطلب</a>
+      </div>
+
+
+ <%   }); %>
+
+</div>
+
+
+</section>
+
+
+
+
+
+  </main>
+  </section>
+
+  <%- include("partials/foter.ejs") %>
+  
+    
+  </body>
+  <script>
+
+
+
+      </script>
+</html>

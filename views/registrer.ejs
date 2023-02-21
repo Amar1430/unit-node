@@ -9,14 +9,20 @@
         
         <form class="loginf" >
             <h1>Registrer</h1>
+            <h3 id="error"></h3>
+
       <div>
-              <label for="username">username:</label>
+              <label for="username">Username:</label>
               <input minlength="2" id="username" type="text">
       </div>
          <div>
-               <label for="password">password:  </label>
+               <label for="password">Password:  </label>
                <input minlength="5" id="password" type="password">
          </div>
+         <div>
+            <label for="phone">Phone Number:  </label>
+            <input  step="hide" minlength="10" maxlength="10" id="phone" type="number">
+      </div>
             <button id="logInB">Registrer</button>
             <a href="/home/login" >Log In</a>
         </form>
@@ -27,6 +33,7 @@
 <script>
     const from = document.querySelector(".loginf")
     const button = document.querySelector("#logInB")
+    const error = document.querySelector("#error")
 
     from.addEventListener("submit", login)
     
@@ -34,21 +41,33 @@
         e.preventDefault()
         const username = document.getElementById("username").value
         const password = document.getElementById("password").value
-        
-  
-        fetch('/api/registrer', {
+        const phone = document.getElementById("phone").value
+if (phone != "" && username != "" && password != "") {
+
+    fetch('/api/registrer', {
             method: 'POST', // or 'PUT'
              headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                username,
-               password
+               password,
+               phone,
+               admin: "no"
             }),
                 })
              .then((response) => response.json())
              .then((data) => {
-             console.log('Success:', data);})
+                error.innerText = data.message
+            if(data.success == "success"){
+                window.location.href = "/home"
+            }
+            })
+}else{
+    error.innerText = "Please Fill All The Input's"
+}
+        
+  
      
  
 }

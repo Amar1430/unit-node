@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html id="top">
+  <head>
+    <%- include("partials/head.ejs") %>
+  </head>
+  <body>
+    <%- include("partials/header.ejs") %>
+
+  
+<main  class="">
+
+
+
+
+
+
+        
+
+          
+          <h5 class="ReqUser2">- <%= req.user %></h5>
+          <h1 id="id" style="font-size: 0px;"><%= req._id %></h1>
+          <h5 class="ReqPhone"> -   <%= phone %></h5>
+        
+  
+
+ <% tshert.forEach(item => { %>
+    
+    <div class="ReqItem">
+        
+        <input type="checkbox" name="" id="ReqCheck">
+        <h5 class="ReqName"> <%= item.name %></h5>
+        <h5 class="ReqPrice"> <%= item.price %> ر.س</h5>
+        
+    </div>
+    <%}); %>
+ 
+
+
+
+        <button id="doneCart">Finish </button>
+
+
+
+
+
+
+</main>
+
+<div style="margin-bottom: 100px;"></div>
+  <%- include("partials/foter.ejs") %>
+  
+    
+  </body>
+  <script>
+
+const doneCart = document.querySelector("#doneCart")
+const id = document.querySelector("#id").innerText
+doneCart.addEventListener("click", (e) => {
+    
+    fetch('/api/done', {
+            method: 'delete', // or 'PUT'
+             headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+            id
+            }),
+                })
+             .then((response) => response.json())
+             .then((data) => {
+                console.log(data)
+                if(data.data == "done"){
+
+                 window.location.href = "/home/admin/dashboard"
+                }
+             })
+})
+      </script>
+</html>
