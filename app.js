@@ -40,23 +40,6 @@ liveReloadServer.server.once("connection", () => {
     liveReloadServer.refresh("/");
   }, 100);
 }); 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDgSuGSq9qZ_HUYLAFdMrJDicHzzhYCAU0",
-  authDomain: "unit-38928.firebaseapp.com",
-  projectId: "unit-38928",
-  storageBucket: "unit-38928.appspot.com",
-  messagingSenderId: "436336067121",
-  appId: "1:436336067121:web:1dfbc88337a854d9e58b10"
-};
-
-// Initialize Firebase
-const app2 = initializeApp(firebaseConfig);
 
 
 const Tshert = require("../models/tshertSchema");
