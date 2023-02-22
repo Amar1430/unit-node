@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 app.use(require("body-parser").json())
 app.use(express.urlencoded({ extended: true }));
- const local = {user: "Amar", }
+ const local = {user: "", }
 
 
  mongoose.set('strictQuery', false);
