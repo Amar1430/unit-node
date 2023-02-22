@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
  const local = {user: "Amar", }
 
 
-
+ mongoose.set('strictQuery', true);
 mongoose.connect("mongodb+srv://amar:Amarxx@cluster0.u9xyi5h.mongodb.net/?retryWrites=true&w=majority")
   .then( result => {
 app.listen(port, process.env.port || 3000 , () => {
@@ -47,7 +47,7 @@ const User = require("./models/user")
 const doneCart = require("./models/DoneCart")
 const incart = require("./models/inCart")
 const { request } = require('express');
-('strictQuery', true);
+
 
 // app.get 
 app.get('/', (req, res) => {
