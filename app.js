@@ -42,14 +42,12 @@ liveReloadServer.server.once("connection", () => {
 }); 
 
 
-const Tshert = require("../models/tshertSchema");
-const User = require("../models/user");
-const doneCart = require("../models/DoneCart");
-
-const { findOneAndDelete } = require('../models/tshertSchema');
-const incart = require('../models/inCart');
+const Tshert = require("./models/tshertSchema")
+const User = require("./models/user")
+const doneCart = require("./models/DoneCart")
+const incart = require("./models/inCart")
 const { request } = require('express');
- 
+('strictQuery', true);
 
 // app.get 
 app.get('/', (req, res) => {
