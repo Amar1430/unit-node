@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 app.use(require("body-parser").json())
 app.use(express.urlencoded({ extended: true }));
@@ -25,7 +26,7 @@ app.listen(port, process.env.port || 3000 , () => {
 app.set('view engine', 'ejs')
 
 app.use(express.static('public'))
-
+app.use(cookieParser())
 const path = require("path");
 const livereload = require("livereload");
 const liveReloadServer = livereload.createServer();
@@ -55,12 +56,13 @@ app.get('/', (req, res) => {
 })
 
 app.get('/home/profile', (req, res) => {
-  res.render("profile", { mytitle: "Profile" , user: local.user});
+  res.render("profile", { mytitle: "Profile" , user: req.cookies.name});
 })
 app.get("/home", (req,res) => {
   
   Tshert.find().then((result) => {
-      res.render("index", { mytitle: "Home", tshert: result , user: local.user});
+      res
+      .render("index", { mytitle: "Home", tshert: result , user: req.cookies.name})
     })
     .catch((err) => {
       console.log(err);
@@ -68,9 +70,9 @@ app.get("/home", (req,res) => {
   })
 
   app.get('/home/cart', (req, res) => {
-    incart.find({user: local.user}).then((inCart) => {
+    incart.find({user: req.cookies.name}).then((inCart) => {
  
-        res.render('cart', {mytitle: "Cart" , user: local.user, tshert: inCart,   })
+        res.render('cart', {mytitle: "Cart" , user: req.cookies.name, tshert: inCart,   })
     
     }).catch((err) => {
       console.log(err)
@@ -79,15 +81,15 @@ app.get("/home", (req,res) => {
   })
 
   app.get('/home/login', (req, res) => {
-    res.render('login', {mytitle: "Log In", user: local.user })
+    res.render('login', {mytitle: "Log In", user: req.cookies.name })
   })
   app.get('/home/admin/dashboard', (req, res) => {
-    User.findOne({username: local.user}).then((result) => {
+    User.findOne({username: req.cookies.name}).then((result) => {
      if (result.admin == "yes") {
 
        doneCart.find().then((result) => {
        
-        res.render('Dashboard', {mytitle: "DashBoard", user: local.user, req: result })
+        res.render('Dashboard', {mytitle: "DashBoard", user: req.cookies.name, req: result })
         
       })
 
@@ -98,12 +100,12 @@ app.get("/home", (req,res) => {
     })
   })
   app.get('/home/registrer', (req, res) => {
-    res.render('registrer', {mytitle: "Registrer", user: local.user })
+    res.render('registrer', {mytitle: "Registrer", user: req.cookies.name })
   })
 
   app.get('/home/tshert/:id', (req, res) => {
     Tshert.findById(req.params.id).then((result) => { 
-      res.render('tshertpage', {tshert: result, user: local.user , mytitle:result.name })
+      res.render('tshertpage', {tshert: result, user: req.cookies.name , mytitle:result.name })
     }).catch((err) => {
       console.log(err) 
     })
@@ -112,7 +114,7 @@ app.get("/home", (req,res) => {
   app.get('/home/admin/finishReq/:id', (req, res) => {
     doneCart.findById(req.params.id).then((result) => { 
      
-        User.findOne({username: local.user}).then((resultUser) => {
+        User.findOne({username: req.cookies.name}).then((resultUser) => {
        const l = []
        
   result.name.forEach(element => {
@@ -126,7 +128,7 @@ app.get("/home", (req,res) => {
 });
 setTimeout(() => {
  
-  res.render('reqFinish', {req: result,phone:resultUser.phone, tshert: l , user: local.user , mytitle: resultUser.username })
+  res.render('reqFinish', {req: result,phone:resultUser.phone, tshert: l , user: req.cookies.name , mytitle: resultUser.username })
 }, 300);
 
 
@@ -140,7 +142,7 @@ setTimeout(() => {
   })
 })
 app.get('/home/team', (req, res) => {
-  res.render('team', {mytitle: "Unit Team" , user: local.user})
+  res.render('team', {mytitle: "Unit Team" , user: req.cookies.name})
 }) 
 //app.post
 app.post("/home", (req,res) => {
@@ -173,8 +175,8 @@ app.post("/api/login", async (req,res) => {
         const gg = async () =>  {
          
           if (await bcrypt.compare(password, result.password)) {
-            local.user = result.username
-            res.json({message: "login", success: "success"})
+          //  local.user = result.username
+            res.cookie("name" , result.username).json({message: "login", success: "success"})
            
             
         } else {res.json({message: "password not true", success: "not success"})
@@ -198,9 +200,9 @@ User.findOne({username}).then((result) => {
 
   if(result == null){
     new User({username , password, phone, admin}).save().then((result) => {
-      local.user = result.username
+  
     
-      res.json({message: "done", success: "success"})
+      res.cookie("name" , result.username).json({message: "done", success: "success"})
     }).catch((err) => {
       console.log(err)
       
@@ -255,9 +257,9 @@ User.findOne({username}).then((result) => {
 
     app.post("/api/editUser", (req,res) => {
 
-      User.findOneAndUpdate({username: local.user}, {username: req.body.editUsername}, (err, result) => {
-        res.json("done")
-        local.user = req.body.editUsername
+      User.findOneAndUpdate({username: req.cookies.name}, {username: req.body.editUsername}, (err, result) => {
+        res.cookie("name", req.body.editUsername ).json("done")
+        req.cookies.name = req.body.editUsername
 
       })
        
@@ -267,8 +269,8 @@ User.findOne({username}).then((result) => {
       })
       app.post("/api/logout", (req,res) => {
 
-        res.json("done")
-        local.user = ""
+        res.cookie("name", "").json("done")
+
         })
     // delet
     app.delete("/api/CartDel", (req,res) => {
@@ -293,9 +295,9 @@ User.findOne({username}).then((result) => {
           
         app.delete("/api/delete-Account", (req,res) => {
 
-          User.findOneAndDelete({username: local.user}).then((result) => {
-            res.json("done")
-            local.user = ""
+          User.findOneAndDelete({username: req.cookies.name}).then((result) => {
+            res.cookie("name", "").json("done")
+           
             })
   
             
@@ -306,5 +308,6 @@ User.findOne({username}).then((result) => {
 
 //404
 app.use( (req, res) => {
-  res.render('404', {mytitle: "404" , user: local.user})
+  
+  res.render('404', {mytitle: "404" , user: req.cookies.name})
 }) 
