@@ -7,8 +7,6 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 app.use(require("body-parser").json())
 app.use(express.urlencoded({ extended: true }));
- const local = {user: "", }
-
 
  mongoose.set('strictQuery', false);
 mongoose.connect("mongodb+srv://amar:Amarxx@cluster0.u9xyi5h.mongodb.net/?retryWrites=true&w=majority")
