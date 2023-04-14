@@ -208,6 +208,11 @@ td {
   height: fit-content;
 }
 
+.menuActive{
+  transform: translate(218px, -4px) rotate(270deg);
+  height: fit-content;
+  width: fit-content;
+}
 @media (max-width: 1100px) {
   .TsherTMine div img{
     width: 300px !important;
@@ -223,14 +228,7 @@ td {
     display: block !important;
   }
 
-  .hover-header-elment:hover .headerA {
-    display: block;
-  }
-  .hover-header-elment:hover .menu {
-    transform: translate(218px, -4px) rotate(270deg);
-    height: fit-content;
-    width: fit-content;
-  }
+
   header > div > div > a {
     display: none;
   }
@@ -254,14 +252,7 @@ td {
     display: block !important;
   }
 
-  .hover-header-elment:hover .headerA {
-    display: block;
-  }
-  .hover-header-elment:hover .menu {
-    transform: translate(218px, -4px) rotate(270deg);
-    height: fit-content;
-    width: fit-content;
-  }
+
   header > div > div > a {
     display: none;
   }
@@ -359,11 +350,7 @@ height: 200px !important;
   
  }
 @media (max-width: 350px) {
-  .hover-header-elment:hover .menu {
-    transform: translateX(360%) rotate(270deg);
-    height: fit-content;
-    width: fit-content;
-  }
+
 
   .hover-header-elment {
     width: 300px;
@@ -423,11 +410,7 @@ justify-content: center;
     transform: translate(-24px, 0);
     width: 100%;
   }
-  .hover-header-elment:hover .menu {
-    transform: translateX(300%) rotate(270deg);
-    height: fit-content;
-    width: fit-content;
-  }
+
   .loginf{
     width: 260px !important;
    }
@@ -509,11 +492,7 @@ justify-content: center;
     transform: translate(-24px, 0);
     width: 100%;
   }
-  .hover-header-elment:hover .menu {
-    transform: translateX(300%) rotate(270deg);
-    height: fit-content;
-    width: fit-content;
-  }
+
   header div img{
     height: 75px;
     
