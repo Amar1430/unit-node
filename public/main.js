@@ -2,11 +2,9 @@ const loginUser = document.querySelector("#loginUser");
 const profillUser = document.querySelector("#profillUser");
 const loginUserA = document.querySelector("#loginUserA");
 const profillUserA = document.querySelector("#profillUserA");
-const user = document.querySelector("#user").innerText;
+const user = document.cookie.split(";").map(cookie => cookie.split("="))[0][1]
 const menu = document.querySelector("#menu")
 const headerA = document.querySelectorAll(".headerA")
-
-
 
 
 

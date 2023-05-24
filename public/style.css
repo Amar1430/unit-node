@@ -1,4 +1,177 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@200&display=swap');
+
+
+*{
+  margin: 0;
+  padding: 0;
+  transition: all 500ms ease-in-out;
+  scroll-behavior: smooth;
+}
+header {
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #f26938 ;
+  box-shadow: 0px 3px 5px 1px  rgba(0, 0, 0, 0.1) ;
+  height: 90px;
+  width: 100%;
+  overflow: hidden;
+  border-bottom-left-radius: 10px ;
+  border-bottom-right-radius: 10px ;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
+header > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  grid-template-columns: 1fr 70%;
+  grid-template-rows: 1fr;
+  grid-template-areas: 
+  "img links";
+}
+header > div> a{
+  margin-left: 20px;
+  margin-right: 310px;
+
+}
+header img {
+
+  width: 140px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.linkH {
+display: block;
+
+}
+.linkH a{
+  margin-right: 40px;
+  width: 150px;
+  color: black;
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: 700;
+  border-radius: 10px;
+}
+.linkH a:hover{
+background-color: rgb(255, 255, 255);
+box-shadow: 0px 0px 4px 12px white;
+
+}
+.linkH a i{
+margin-left: 10px;
+  
+}
+main{
+  margin-top: 100px;
+}
+.headerA{
+  display: none;
+}
+#menu{
+  display: none;
+}
+.dn{
+  display: none;
+}
+.db{
+  display: block;
+}
+
+#store{
+  margin-left: 50px;
+  font-size: 30px;
+}
+
+
+
+
+
+
+
+.color1 {
+  margin-top: 90px;
+  background-color: #f2f2f2;
+}
+
+.color2 {
+  background-color: #f2cb57;
+}
+
+.color3 {
+  background-color: #f26938;
+}
+
+.color4 {
+  background-color: #bf3939;
+}
+
+.color5 {
+  color: white;
+  background-color: #000;
+}
+
+.color6 {
+  background-color: darkblue;
+  color: white;
+}
+
+.store{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+}
+.card{
+  background-color: #f2f2f2;
+  margin: 20px 30px 20px 30px;
+  width: 300px;
+  height: 400px;
+  overflow: hidden;
+position: relative;
+  border-radius: 10px;
+  box-shadow: 2px 1px 10px 1px  rgba(242, 105, 56, 0.4)  ;
+}
+.card img{
+  display: block;
+  width: 280px;
+  margin-top: 10px;
+  border-radius: 10px;
+  margin-left: auto;margin-right: auto;
+}
+.card h1{
+  margin-top: 30px;
+  width:230px;
+  margin-left: auto;margin-right: auto;
+  font-size: 25px;
+}
+.card h3{
+  width:225px;
+  margin-left: auto;margin-right: auto;
+  color: grey;
+  font-size: 20px;
+}
+.card a{
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background-color: #f2cb57 ;
+  width: 65px;
+  height: 25px;
+  font-size: 20px;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 4px;
+  text-align: center; 
+   box-shadow: 1px 1px 10px 1px  rgba(242, 105, 56, 0.4)  ;
+}
+.card a:hover{
+  box-shadow: 3px 3px 10px 3px  rgba(242, 105, 56, 0.4)  ;
+
+}
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@200&display=swap');
 * {
   padding: 0;
   margin: 0;
@@ -160,7 +333,7 @@ td {
   margin-left: 25px;
   font-size: 25px;
 }
-/* drob menu */
+// drob menu //
 
 .menu {
   display: none !important;
@@ -186,12 +359,12 @@ td {
   text-decoration: none;
   font-size: 30px;
   padding: 10px;
-  /* border-top: black solid 1px;
+  // border-top: black solid 1px;
   border-right: black solid 1px;
-  border-left: black solid 1px; */
+  border-left: black solid 1px; //
   border-radius: 15px;
-  /* margin-top: 10px; */
-  /* border-bottom: black solid 1px;    */
+  // margin-top: 10px; //
+  // border-bottom: black solid 1px;    //
 }
 
 .headerA2 {
@@ -259,7 +432,7 @@ td {
 }
 
 
-/* -------------------------------------------------------------- */
+// -------------------------------------------------------------- //
 
 
 
@@ -619,7 +792,7 @@ grid-template-areas:
 .TsherTMine > .priseDiv > div {
   display: flex;
   flex-direction: row-reverse;
-  /* justify-content: space-between; */
+  // justify-content: space-between; //
   padding: 0;
   margin: 0;
   margin-top: 90px;
@@ -978,7 +1151,7 @@ html {
   width: 130px;
   border-radius: 10px 0 0 10px;
   height: 32px;
-  /* margin-right: 20px; */
+  // margin-right: 20px; //
   font-size: 18px;
   text-align: center;
 }
@@ -1270,4 +1443,4 @@ text-align: center;
   border-radius: 10px;
   height: 50px;
   cursor: pointer;
-}
+} */
