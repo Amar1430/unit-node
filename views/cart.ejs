@@ -1,187 +1,218 @@
 <!DOCTYPE html>
 <html id="top">
+
 <head>
-    <%- include("partials/head.ejs") %>
+  <%- include("partials/head.ejs") %>
+  <style>
+
+    footer{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+  </style>
 </head>
-<body  >
-    <%- include("partials/header.ejs") %>
-    
-<main class="mainCART">
-         
-         <% tshert.forEach(item => { %>
-    
-  <div class="cartDiv">
-    <div>
-      <div>
-         <h1 style="font-size: 0px; " id="cartItemId"><%= item._id %> </h1>
-         <h1>:السعر</h>
-        <h1 id="price"> <%= item.price %> </h1>
-      </div>
-      <div>
-        <h1>:المقاس</h1>
-    
-        <h1 id="size"><%= item.size%></h1>
-      </div>
-    </div>
-    
-    <div>
-      <h1 id="cartName"><%= item.name%></h1>
-      
-      <img class="cartImage" src="/img/UNIT T SHERT.jpeg" alt="" />
-      <ion-icon class="trash"  id="trash"   name="close-outline"></ion-icon>
-    </div>
-    
-    </div>
 
-    <% }); %> 
-  <div class="FinaleBuy">
-    <div><h3 id="cartItem">1</h3><h3>item's</h3></div>
-    <div><h3>Total: </h3><h3 id="total">100</h3></div>
-    
-    <button id="buy">Buy</button>
-  </div>
-  
- 
-</main>
-<%- include("partials/foter-pro.ejs") %>
+<body>
+  <%- include("partials/header.ejs") %>
 
-<script>
-  const cartDiv = document.querySelectorAll(".cartDiv")
-const foterPro = document.querySelector("#foter-pro")
-  const local = {num: 0, here:"no"}
-  
-  const trashs = document.querySelectorAll("#trash")
-  const main = document.querySelector(".mainCART")
-  function upNum() {
-    
-    const mainDiv = main.querySelectorAll(".cartDiv")
-    const cartItem = document.querySelector("#cartItem")
- 
-    mainDiv.forEach(element => {
-      local.num++;
-});
-cartItem.innertext = local.num
-}
+    <main class="mainCART">
 
-upNum()
+      <% tshert.forEach(item=> { %>
 
-  
-trashs.forEach(item => {
+        <div class="cartDiv">
+          <div>
+            <div>
+              <h1 style="font-size: 0px; " id="cartItemId">
+                <%= item._id %>
+              </h1>
+              <div>
+                <h1>:السعر</h1>
+                <h1 id="price">
+                  <%= item.price %>
+                </h1>
+              </div>
+            </div>
+            <div>
+              <div>
+                <h1>:المقاس</h1>
 
-  const id = item.parentElement.parentElement.querySelector("#cartItemId").innerText
-
-    item.addEventListener("click", (eo) => {
-      fetch('/api/CartDel', {
-        method: 'Delete', // or 'PUT'
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          id
-        }),
-      })
-      .then((response) => response.json())
-      item.parentElement.parentElement.remove()
-      const foterPro = document.querySelector("#foter-pro")
-      
-      const main = document.querySelector(".mainCART").getElementsByClassName("cartDiv")[0]
-   
-
-upNum()
-    }
-)
-})
-const mainDiv = document.querySelector(".mainCART").getElementsByClassName("cartDiv")[0]
-const cartItemId = document.querySelectorAll("#cartItemId")
-
-
-
-
- async function ads(params) {
-  const main = document.querySelector(".mainCART").getElementsByClassName("cartDiv")[0]
-  
-  if(main == undefined){
-      local.here = "no"
-    }else{
-      local.here = "yes"
-
-    }
-
-  if (local.here == "no" ) {
-    foterPro.classList.add("foter-pro")
-  
-  }else if (local.here == "yes"){
-  await foterPro.classList.remove("foter-pro")
-
-  }
-  const item = document.querySelector(".mainCART").querySelectorAll(".cartDiv")
-
-  const cartItem = document.querySelector("#cartItem").innerText =   item.length
-const totalprice = {total: 0}
-item.forEach(element => {
-
-const d = element.parentElement.querySelector("#price").innerText.split("ر.س")
-const price = Number(d[0])
-const t = totalprice.total + price
-// console.log(t)
-totalprice.total = t
-
-});
-  const total = document.querySelector("#total").innerText = totalprice.total
-
-
-  }
-
-
-  setInterval(() => {
-    ads()
-
-
-
-
-
-  }, 1);
-
-const buy = document.querySelector("#buy").addEventListener("click", (e) => {
-  const item = document.querySelector(".mainCART").querySelectorAll(".cartDiv")
-const req = []
-  console.log(req)
-  item.forEach(element => {
-
-
-req.push( element.querySelector("#cartName").innerText)
- 
-  });
-  if (req.length != 0) {
-  
-  
-    fetch('/api/DoneShop', {
-        method: 'Post', // or 'PUT'
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          user: user,
-          name: req,
+                <h1 id="size">
+                  <%= item.size%>
+                </h1>
+              </div>
+            </div>
+          </div>
           
-        }),
-      })
-      .then((response) => response.json())
-      .then((data) => {
-         
-                if(data == "done"){
+          <div>
+            <h1 id="cartName">
+              <%= item.name%>
+            </h1>
+            
+            <img class="cartImage" src="/img/UNIT T SHERT.jpeg" alt="" />
+            <ion-icon class="trash" id="trash" name="close-outline"></ion-icon>
+          </div>
 
-                 window.location.href = "/home"
+        </div>
+
+        <% }); %>
+          <div class="FinaleBuy">
+            <div>
+              <h3 id="cartItem">1 </h3>
+              <h3> item's</h3>
+            </div>
+            <div>
+              <h3>Total: </h3>
+              <h3 id="total">100</h3>
+            </div>
+
+            <button id="buy">Buy</button>
+          </div>
+
+
+    </main>
+    <%- include("partials/foter-pro.ejs") %>
+
+      <script>
+        const cartDiv = document.querySelectorAll(".cartDiv")
+        const foterPro = document.querySelector("#foter-pro")
+        const local = { num: 0, here: "no" }
+
+        const trashs = document.querySelectorAll("#trash")
+        const main = document.querySelector(".mainCART")
+        function upNum() {
+
+          const mainDiv = main.querySelectorAll(".cartDiv")
+          const cartItem = document.querySelector("#cartItem")
+
+          mainDiv.forEach(element => {
+            local.num++;
+          });
+          cartItem.innertext = local.num
+        }
+
+        upNum()
+
+
+        trashs.forEach(item => {
+
+          const id = item.parentElement.parentElement.querySelector("#cartItemId").innerText
+
+          item.addEventListener("click", (eo) => {
+            fetch('/api/CartDel', {
+              method: 'Delete', // or 'PUT'
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                id
+              }),
+            })
+              .then((response) => response.json())
+            item.parentElement.parentElement.remove()
+            const foterPro = document.querySelector("#foter-pro")
+
+            const main = document.querySelector(".mainCART").getElementsByClassName("cartDiv")[0]
+
+
+            upNum()
+          }
+          )
+        })
+        const mainDiv = document.querySelector(".mainCART").getElementsByClassName("cartDiv")[0]
+        const cartItemId = document.querySelectorAll("#cartItemId")
+
+
+
+
+        async function ads(params) {
+          const main = document.querySelector(".mainCART").getElementsByClassName("cartDiv")[0]
+
+          if (main == undefined) {
+            local.here = "no"
+          } else {
+            local.here = "yes"
+
+          }
+
+          if (local.here == "no") {
+            foterPro.classList.add("foter-pro")
+
+          } else if (local.here == "yes") {
+            await foterPro.classList.remove("foter-pro")
+
+          }
+          const item = document.querySelector(".mainCART").querySelectorAll(".cartDiv")
+
+          const cartItem = document.querySelector("#cartItem").innerText = item.length
+          const totalprice = { total: 0 }
+          item.forEach(element => {
+
+            const d = element.parentElement.querySelector("#price").innerText.split("ر.س")
+            const price = Number(d[0])
+            const t = totalprice.total + price
+            // console.log(t)
+            totalprice.total = t
+
+          });
+          const total = document.querySelector("#total").innerText = totalprice.total
+
+
+        }
+
+
+        setInterval(() => {
+          ads()
+
+
+
+
+
+        }, 1);
+
+        const buy = document.querySelector("#buy").addEventListener("click", (e) => {
+          const item = document.querySelector(".mainCART").querySelectorAll(".cartDiv")
+          const req = []
+          console.log(req)
+          item.forEach(element => {
+
+
+            req.push(element.querySelector("#cartName").innerText)
+
+          });
+          if (req.length != 0) {
+
+
+            fetch('/api/DoneShop', {
+              method: 'Post', // or 'PUT'
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                user: user,
+                name: req,
+
+              }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+
+                if (data == "done") {
+
+                  window.location.href = "/home"
                 }
-             })
-}
-})
-
-       
-     
+              })
+          }
+        })
 
 
-</script>
 
-    </body>
-    </html>
+
+
+      </script>
+
+</body>
+
+</html>

@@ -9,56 +9,52 @@
   
   <section  style=" margin-top: 100px;">
     <main class="TsherTMine">
+
+ <div>
+  
+   
+   
+   <img src="/img/UNIT T SHERT.jpeg" alt="">
+
+<div >
+     <h1 id="Tshertname"><%= tshert.name %></h1>
+  <br><br><br>
+     <hr>
+     <div  class="priceDiv">
       <div>
+        <h3 id="TshertPrice"> <%= tshert.price %> ر.س </h3>
       
-
-      <div style="grid-area: title;">
-            <h1 style="margin-top: 40px;" id="Tshertname"> <%= tshert.name %></h1>
       </div>
-
-  <div style="grid-area: ff;">
-            <h2>  <span> بئنه <%= tshert.name%> يميز   </span>  
-                  <ul>
-                      <li>خفيف للصيف والاجواء الحاره في الشرق الأوسط وفي الخليج </li> 
-                      <li>جميع المقاسات متوفره </li> 
-                      <li> الخلاب Unit يتميز بشعار </li>
-                    </ul>
-                  </h2>
-  </div>
-         
-          <div style="grid-area: img;">
-            
-            <img src="/img/UNIT T SHERT.jpeg" alt="amartshert">
-          </div>
+        <select class="select"  id="AmarSelect">
+          
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option class="op" value="L">L</option>
+          <option value="XS">XS</option>
+          <option value="XL">XL</option>
+          <option value="XXL">XXL</option>
+          <option value="XXS">XXS</option>
+          <option value="XXXL">XXXL</option>
+          <option value="XXXS">XXXS</option>
+          
+          </select>
+          <form id="addTocartForm" >
+            <h1 id="idCart" style="font-size: 0px;"><%= tshert._id %> </h1>
+            <button class="amartocart">إضافة الى سلة التسوق  <i class="fa-solid fa-2xs fa-bag-shopping"></i></button>
+     
+      </form>
+      <div id="needLogin">
+        <h1>Please Login to buy</h1>
+        <h3>You can login from <a href="/home/login">here</a></h3>
       </div>
-      <div class="priseDiv">
-        <div>
-          <h3>:السعر</h3>
-          <h3 id="TshertPrice"><%= tshert.price %> ر.س</h3>
-        </div>
-          <select class="select"  id="AmarSelect">
-            
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option class="op" value="L">L</option>
-            <option value="XS">XS</option>
-            <option value="XL">XL</option>
-            <option value="XXL">XXL</option>
-            <option value="XXS">XXS</option>
-            <option value="XXXL">XXXL</option>
-            <option value="XXXS">XXXS</option>
-            
-            </select>
-            <form id="addTocartForm" >
-              <h1 id="idCart" style="font-size: 0px;"><%= tshert._id %> </h1>
-              <button class="amartocart">إضافة الى سلة التسوق  <i class="fa-solid fa-2xs fa-bag-shopping"></i></button>
-       
-        </form>
-        <div id="needLogin">
-          <h1>Please Login to buy</h1>
-          <h3>You can login from <a href="/home/login">here</a></h3>
-        </div>
-        </div>
+      </div>
+  
+    </div>
+  
+</div>
+
+
+
         <div id="alertDone" class="alert-done">
       
             <h1>Done  <i class="fa-regular fa-circle-check"></i></h1>
@@ -82,14 +78,18 @@
 
 const newuser = user.innerText
 
+
     if(newuser != ""){
       addTocartForm.style.display = "block"
       needLogin.style.display = "none"
+    }else{
+      addTocartForm.style.display = "none"
+      needLogin.style.display = "block"
     }
 
 
 
-
+    alertDone.style.display = "none"
 
 addTocartForm.addEventListener("submit", (e) => {     
   e.preventDefault()
@@ -99,9 +99,9 @@ addTocartForm.addEventListener("submit", (e) => {
       alertDone.classList.remove("alert-done-active")
      
     }, 4000);
-      const tshert = document.querySelector("#AmarSelect").value
-      const price = document.querySelector("#TshertPrice").innerText
-      const name = document.querySelector("#Tshertname").innerText
+      const tshert = document.querySelector("#AmarSelect").value;
+      const price = document.querySelector("#TshertPrice").innerText;
+      const name = document.querySelector("#Tshertname").innerText;
       fetch('/api/addToCart', {
         method: 'POST', // or 'PUT'
         headers: {

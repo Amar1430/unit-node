@@ -2,12 +2,24 @@
 <html id="top">
   <head>
     <%- include("partials/head.ejs") %>
+    <style>
+
+      footer{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+      main{
+        margin-top: 140px;
+      }
+    </style>
   </head>
   <body>
     <%- include("partials/header.ejs") %>
 
   
-<main  class="">
+<main >
 
 
 
@@ -17,18 +29,20 @@
         
 
           
-          <h5 class="ReqUser2">- <%= req.user %></h5>
+          <h1 class="ReqUser2"> <%= req.user %></h1>
           <h1 id="id" style="font-size: 0px;"><%= req._id %></h1>
-          <h5 class="ReqPhone"> -   <%= phone %></h5>
+          <h1 class="ReqPhone">    <%= phone %></h1>
         
   
 
  <% tshert.forEach(item => { %>
     
     <div class="ReqItem">
-        
-        <input type="checkbox" name="" id="ReqCheck">
-        <h5 class="ReqName"> <%= item.name %></h5>
+        <div>
+          
+          <input type="checkbox" name="" id="ReqCheck">
+          <h5 class="ReqName"> <%= item.name %></h5>
+        </div>
         <h5 class="ReqPrice"> <%= item.price %> ر.س</h5>
         
     </div>
