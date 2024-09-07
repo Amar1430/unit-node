@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 mongoose.set("strictQuery", false);
 mongoose
   .connect(
-    "mongodb+srv://amar:Amarxx@cluster0.u9xyi5h.mongodb.net/?retryWrites=true&w=majority"
+    "mongodb://amar:Amarxx@ac-lykozw3-shard-00-00.u9xyi5h.mongodb.net:27017,ac-lykozw3-shard-00-01.u9xyi5h.mongodb.net:27017,ac-lykozw3-shard-00-02.u9xyi5h.mongodb.net:27017/?ssl=true&replicaSet=atlas-65er9p-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0"
   )
   .then((result) => {
     app.listen(port, process.env.port || 3000, () => {
